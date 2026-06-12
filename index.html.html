@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bhumika Gautam — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0D0D0D;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --accent: #6EE7B7;
+    --accent2: #818CF8;
+    --text: #F0F0F0;
+    --muted: #888;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 700; font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 0.875rem; color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  .hero {
+    min-height: 90vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 4rem 2rem 3rem;
+    max-width: 900px; margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--muted);
+    max-width: 560px; margin-bottom: 2.5rem; line-height: 1.8;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 500; cursor: pointer;
+    transition: all 0.2s; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--accent); color: #0D0D0D; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost { border-color: var(--border); color: var(--text); background: transparent; }
+  .btn-ghost:hover { border-color: var(--muted); }
+
+  section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent2); margin-bottom: 2.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 600; letter-spacing: -0.02em; margin-bottom: 2.5rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+  .skill-chip {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.6rem 1rem;
+    font-size: 0.85rem; color: var(--text); text-align: center;
+    transition: border-color 0.2s;
+  }
+  .skill-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .skill-chip.learning {
+    border-color: rgba(129,140,248,0.3);
+    color: var(--accent2);
+  }
+  .learning-note {
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .learning-note span { color: var(--accent2); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.75rem;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-tag {
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .project-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem; font-weight: 600; margin-bottom: 0.75rem;
+  }
+  .project-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .tech-tag {
+    background: rgba(110,231,183,0.08);
+    border: 1px solid rgba(110,231,183,0.2);
+    color: var(--accent); border-radius: 4px;
+    padding: 0.2rem 0.6rem; font-size: 0.75rem;
+  }
+  .project-links { display: flex; gap: 1rem; }
+  .project-links a {
+    font-size: 0.82rem; color: var(--muted);
+    transition: color 0.2s; display: flex; align-items: center; gap: 0.3rem;
+  }
+  .project-links a:hover { color: var(--accent); }
+
+  .edu-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.75rem;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .edu-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .edu-card p { font-size: 0.9rem; color: var(--muted); }
+  .edu-badge {
+    background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3);
+    color: var(--accent2); border-radius: 6px;
+    padding: 0.35rem 0.8rem; font-size: 0.82rem;
+    height: fit-content; white-space: nowrap;
+  }
+
+  .contact-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 3rem 2rem; text-align: center;
+  }
+  .contact-box h2 { margin-bottom: 0.75rem; }
+  .contact-box p { color: var(--muted); max-width: 440px; margin: 0 auto 2rem; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 0.6rem 1.2rem; font-size: 0.875rem; color: var(--text); transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  footer {
+    text-align: center; padding: 2rem;
+    font-size: 0.8rem; color: var(--muted);
+    border-top: 1px solid var(--border); margin-top: 2rem;
+  }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0 2rem; }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+    .hero { padding: 3rem 1.25rem 2rem; }
+    section { padding: 3.5rem 1.25rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Bhumika.dev</span>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Frontend Developer · B.Tech CSE · Open to Internships</p>
+  <h1>
+    Hi, I'm<br/>
+    <span>Bhumika Gautam</span>
+  </h1>
+  <p class="hero-sub">
+    A passionate frontend developer from Kota, Rajasthan. I love building clean,
+    responsive web interfaces and am currently diving deeper into React.js to create
+    modern, interactive user experiences.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View My Work</a>
+    <a href="#contact" class="btn btn-ghost">Contact Me</a>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<section id="skills">
+  <p class="section-label">What I know</p>
+  <h2>Skills & Technologies</h2>
+  <div class="skills-grid">
+    <div class="skill-chip">HTML5</div>
+    <div class="skill-chip">CSS3</div>
+    <div class="skill-chip">JavaScript</div>
+    <div class="skill-chip">DOM Manipulation</div>
+    <div class="skill-chip">Local Storage</div>
+    <div class="skill-chip">Responsive Design</div>
+    <div class="skill-chip">Git & GitHub</div>
+    <div class="skill-chip learning">React.js ✦ Learning</div>
+  </div>
+  <p class="learning-note">✦ <span>Currently learning</span> — React.js projects in progress</p>
+</section>
+
+<hr class="divider"/>
+
+<section id="projects">
+  <p class="section-label">What I've built</p>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <p class="project-tag">JavaScript · DOM</p>
+      <h3>To-Do List App</h3>
+      <p>A responsive task management app with full CRUD functionality — add, edit, delete, and mark tasks complete. Uses Local Storage to persist data across page reloads.</p>
+      <div class="project-tech">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">LocalStorage</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/bhumikagautam2005/To-Do-List-App" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p class="project-tag">React.js · UI</p>
+      <h3>React Login & Signup Form</h3>
+      <p>A clean authentication UI built with React JS featuring Login and Signup pages, responsive design, and a minimal user interface with styled form components.</p>
+      <div class="project-tech">
+        <span class="tech-tag">React.js</span>
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/bhumikagautam2005/Login-Form" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<section id="education">
+  <p class="section-label">Background</p>
+  <h2>Education</h2>
+  <div class="edu-card">
+    <div>
+      <h3>B.Tech — Computer Science & Engineering</h3>
+      <p>Modi Institute of Technology, Kota, Rajasthan</p>
+      <p style="margin-top:0.4rem; font-size:0.85rem;">Relevant coursework: Web Technologies, Data Structures, DBMS, OOPs</p>
+    </div>
+    <div style="text-align:right;">
+      <span class="edu-badge">2022 – 2026</span>
+      <p style="margin-top:0.5rem; font-size:0.85rem; color: #6EE7B7;">CGPA: 8.0 / 10</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<section id="contact">
+  <div class="contact-box">
+    <h2>Let's connect!</h2>
+    <p>I'm actively looking for frontend internships and fresher roles. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:gautambhumika65@gmail.com">✉ gautambhumika65@gmail.com</a>
+      <a class="contact-link" href="https://linkedin.com/in/bhumika-gautam-b6a850356" target="_blank">in LinkedIn</a>
+      <a class="contact-link" href="https://github.com/bhumikagautam2005" target="_blank">⌥ GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Built with ♥ by Bhumika Gautam · 2025
+</footer>
+
+</body>
+</html>
